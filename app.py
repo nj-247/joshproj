@@ -4,6 +4,7 @@ import traceback
 import numpy as np
 from xgboost import XGBClassifier   
 
+const port = process.env.PORT || 4000 
 app = Flask(__name__, static_folder='static')
 
 # Load your trained model
