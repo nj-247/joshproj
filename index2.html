@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHD Prediction Project</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css">
+
+  <!-- D3.js for data visualization -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="content">
+      <h1>Predicting Cardiovascular Disease</h1>
+      <p>
+        A machine learning-powered project to assess heart disease risk from medical and lifestyle data.
+      </p>
+      <a href="#run-model" class="btn-primary">Run the Model</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>1. Project Overview</h2>
+    <p>
+      This tool predicts an individual’s likelihood of developing cardiovascular disease using lifestyle and health data. It leverages machine learning models and interactive visualizations to return personalized assessments.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Intern</h4>
+        <p>Josh Nguyen</p>
+      </div>
+      <div class="info-card">
+        <h4>Mentor</h4>
+        <p>Elizabeth Lin</p>
+      </div>
+      <div class="info-card">
+        <h4>Timeline</h4>
+        <p>July 14 – August 22</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fbusy-hospital&psig=AOvVaw0G6XbjwEhbvD9LvYr64sO8&ust=1754539170226000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCOiV2vKl9Y4DFQAAAAAdAAAAABAK=1400&q=80');"></div>
+
+  <section>
+    <h2>2. Problem Statement</h2>
+    <p>
+      In 2021, CHD accounted for 26.9% of deaths from major causes in the U.S. Early detection of key risk factors—like high blood pressure, cholesterol, and BMI—can significantly reduce preventable complications.
+    </p>
+  </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const chartData = [
+    { factor: 'Age', weight: 0.3 },
+    { factor: 'BMI', weight: 0.2 },
+    { factor: 'Blood Pressure', weight: 0.2 },
+    { factor: 'Cholesterol', weight: 0.2 },
+    { factor: 'Smoking', weight: 0.1 },
+    { factor: 'Diabetes', weight: 0.1 },
+    { factor: 'Fasting Blood Sugar', weight: 0.1 }
+  ];
+
+  // BAR CHART
+  const svg = d3.select("#bar-chart")
+                .append("svg")
+                .attr("width", 600)
+                .attr("height", 400);
+
+  const margin = { top: 20, right: 30, bottom: 40, left: 100 },
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+
+  const g = svg.append("g")
+               .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear()
+              .domain([0, d3.max(chartData, d => d.weight)])
+              .range([0, width]);
+
+  const y = d3.scaleBand()
+              .domain(chartData.map(d => d.factor))
+              .range([0, height])
+              .padding(0.1);
+
+  g.selectAll(".bar")
+    .data(chartData)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("y", d => y(d.factor))
+    .attr("width", d => x(d.weight))
+    .attr("height", y.bandwidth())
+    .attr("fill", "#00bcd4");
+
+  g.append("g")
+    .call(d3.axisLeft(y));
+
+  g.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(5));
+
+  // TABLE POPULATION
+  const table = d3.select("#risk-table").select("tbody");
+  table.selectAll("tr")
+    .data(chartData)
+    .enter()
+    .append("tr")
+    .html(d =>
+      `<td style="padding: 0.5rem;">${d.factor}</td>
+       <td style="padding: 0.5rem;">--</td>
+       <td style="padding: 0.5rem;">${(d.weight * 100).toFixed(1)}%</td>`
+    );
+});
+
+
+</script>
+<section class="goal">
+  <div>
+    <h2>Visual Data Insights</h2>
+    <p>Explore how different health factors contribute to CHD risk.</p>
+
+    <!-- Bar Chart Placeholder -->
+    <div id="bar-chart" style="width: 100%; max-width: 600px; height: 400px; margin: 2rem auto;"></div>
+
+    <!-- Table Placeholder -->
+    <table id="risk-table" style="width: 100%; max-width: 700px; margin: 2rem auto; border-collapse: collapse; color: white;">
+      <thead>
+        <tr>
+          <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Factor</th>
+          <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Value</th>
+          <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Risk Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be inserted by D3 -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+  <section>
+    <h2>3. Goals & Tools</h2>
+    <ul>
+      <li><strong>Machine Learning:</strong> Logistic Regression to classify CHD risk</li>
+      <li><strong>User Interface:</strong> Interactive web form with visual feedback</li>
+      <li><strong>Tech Stack:</strong> Python, D3.js, JavaScript, Vega-Lite, HTML/CSS</li>
+      <li><strong>Data:</strong> CDC, Kaggle public health datasets</li>
+    </ul>
+  </section>
+
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80');"></div>
+
+  <section id="run-model">
+    <h2>Run the CHD Risk Predictor</h2>
+    <p>Click below to input your health data and get a personalized heart disease risk report.</p>
+    <a href="/predictor" class="btn-primary">Go to Prediction Tool</a>
+  </section>
+
+  <a href="/" class="btn-primary" style="margin-top:20px;">&#8592; Back to Home</a>
+
+  <footer>
+    <p>© 2025 STEM League | Created by Josh Nguyen | <a href="https://www.kaggle.com">Data Sources</a></p>
+  </footer>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
