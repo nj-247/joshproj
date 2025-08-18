@@ -4,7 +4,6 @@ import traceback
 import numpy as np
 from xgboost import XGBClassifier   
 
-const port = process.env.PORT || 4000 
 app = Flask(__name__, static_folder='static')
 
 # Load your trained model
@@ -65,4 +64,6 @@ def serve_predictor():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    # app.run(host="127.0.0.1", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # default to 5000 locally
+    app.run(host="0.0.0.0", port=port)
