@@ -1,0 +1,362 @@
+{
+  "chart": {
+    "title": "Share of deaths from major causes",
+    "subtitle": "Share of reported deaths from major causes, based on the [underlying cause](#dod:underlying-cause-of-death) listed on death certificates.",
+    "note": "All deaths in a country may not have been registered with a [cause of death](#dod:underlying-cause-of-death).",
+    "citation": "WHO Mortality Database (2025)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/share-of-deaths-from-major-causes?tab=line&time=earliest..2021&focus=Cardiovascular+disease~Cancers~Dementias+and+neuropsychiatric+disorders~Respiratory+infections~Respiratory+diseases~Diabetes%2C+blood+and+endocrine+disorders&v=1&csvType=filtered&useColumnShortNames=false",
+    "selection": [
+      "United States"
+    ]
+  },
+  "columns": {
+    "Share of total deaths in both sexes in those aged all ages that are from digestive diseases": {
+      "titleShort": "Digestive diseases",
+      "titleLong": "Digestive diseases",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from digestive diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define digestive diseases are K20-K92."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086886,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_digestive_diseases__icd10_codes_k20_k92",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Digestive diseases” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086886.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from infectious and parasitic diseases": {
+      "titleShort": "Infectious and parasitic diseases",
+      "titleLong": "Infectious and parasitic diseases",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from infectious and parasitic diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define infectious and parasitic diseases are A00-B99, G00-G04, G14, N70-N73, P37.3, P37.4."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086889,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_infectious_and_parasitic_diseases__icd10_codes_a00_b99__g00_g04__g14__n70_n73__p37_3__p37_4",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Infectious and parasitic diseases” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086889.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from respiratory diseases": {
+      "titleShort": "Respiratory diseases",
+      "titleLong": "Respiratory diseases",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from respiratory diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define respiratory diseases are J30-J98."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086899,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_respiratory_diseases__icd10_codes_j30_j98",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Respiratory diseases” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086899.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from diabetes mellitus, blood and endocrine disorders": {
+      "titleShort": "Diabetes, blood and endocrine disorders",
+      "titleLong": "Diabetes, blood and endocrine disorders",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from diabetes mellitus, blood and endocrine disorders.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define diabetes mellitus, blood and endocrine disorders are E10-E14, D55-D64 (minus D64.9),D65-D89, E03-E07, E15-E16, E20-E34, E65-E88."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086885,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_diabetes_mellitus__blood_and_endocrine_disorders__icd10_codes_e10_e14__d55_d64__minus_d64_9__d65_d89__e03_e07__e15_e16__e20_e34__e65_e88",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Diabetes, blood and endocrine disorders” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086885.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from intentional injuries": {
+      "titleShort": "Intentional injuries",
+      "titleLong": "Intentional injuries",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from intentional injuries.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define intentional injuries are X60-Y09, Y35-Y36, Y870, Y871."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086890,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_intentional_injuries__icd10_codes_x60_y09__y35_y36__y870__y871",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Intentional injuries” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086890.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from perinatal conditions": {
+      "titleShort": "Perinatal conditions",
+      "titleLong": "Perinatal conditions",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from perinatal conditions.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define perinatal conditions are P00-P96 (minus P23, P37.3, P37.4)."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086898,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_perinatal_conditions__icd10_codes_p00_p96__minus_p23__p37_3__p37_4",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Perinatal conditions” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086898.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from respiratory infections": {
+      "titleShort": "Respiratory infections",
+      "titleLong": "Respiratory infections",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from respiratory infections.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define respiratory infections are H65-H66, J00-J22,  P23, U04, U07.1, U07.2, U09.9, U10.9."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086900,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_respiratory_infections__icd10_codes_h65_h66__j00_j22__p23__u04__u07_1__u07_2__u09_9__u10_9",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Respiratory infections” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086900.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from neuropsychiatric conditions": {
+      "titleShort": "Dementias and neuropsychiatric disorders",
+      "titleLong": "Dementias and neuropsychiatric disorders",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from neuropsychiatric conditions.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define neuropsychiatric conditions are F01-F99, G06-G98 (minus G14), U07.0, X41, X42, X44, X45."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086894,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_neuropsychiatric_conditions__icd10_codes_f01_f99__g06_g98__minus_g14__u07_0__x41__x42__x44__x45",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Dementias and neuropsychiatric disorders” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086894.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from malignant neoplasms": {
+      "titleShort": "Cancers",
+      "titleLong": "Cancers",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from malignant neoplasms.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define malignant neoplasms are C00-C97."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086891,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_malignant_neoplasms__icd10_codes_c00_c97",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Cancers” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086891.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from cardiovascular diseases": {
+      "titleShort": "Cardiovascular disease",
+      "titleLong": "Cardiovascular disease",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from cardiovascular diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define cardiovascular diseases are I00-I99."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086883,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_cardiovascular_diseases__icd10_codes_i00_i99",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Cardiovascular disease” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086883.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from ill-defined injuries": {
+      "titleShort": "Ill-defined injuries",
+      "titleLong": "Ill-defined injuries",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from ill-defined injuries.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define ill-defined injuries are Y10-Y34, Y872."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1968-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086888,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_ill_defined_injuries__icd10_codes_y10_y34__y872",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Ill-defined injuries” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086888.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from musculoskeletal diseases": {
+      "titleShort": "Musculoskeletal diseases",
+      "titleLong": "Musculoskeletal diseases",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from musculoskeletal diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define musculoskeletal diseases are M00-M99."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086893,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_musculoskeletal_diseases__icd10_codes_m00_m99",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Musculoskeletal diseases” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086893.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from congenital anomalies": {
+      "titleShort": "Congenital anomalies",
+      "titleLong": "Congenital anomalies",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from congenital anomalies.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define congenital anomalies are Q00-Q99."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086884,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_congenital_anomalies__icd10_codes_q00_q99",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Congenital anomalies” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086884.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from maternal conditions": {
+      "titleShort": "Maternal conditions",
+      "titleLong": "Maternal conditions",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from maternal conditions.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define maternal conditions are O00-O99."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086892,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_maternal_conditions__icd10_codes_o00_o99",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Maternal conditions” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086892.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from nutritional deficiencies": {
+      "titleShort": "Nutritional deficiencies",
+      "titleLong": "Nutritional deficiencies",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from nutritional deficiencies.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define nutritional deficiencies are E00-E02, E40-E46, E50, D50-D53,D64.9, E51-E64."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086895,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_nutritional_deficiencies__icd10_codes_e00_e02__e40_e46__e50__d50_d53_d64_9__e51_e64",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Nutritional deficiencies” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086895.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from other neoplasms": {
+      "titleShort": "Non-malignant cancers",
+      "titleLong": "Non-malignant cancers",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from other neoplasms.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define other neoplasms are D00-D48."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086897,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_other_neoplasms__icd10_codes_d00_d48",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Non-malignant cancers” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086897.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from skin diseases": {
+      "titleShort": "Skin diseases",
+      "titleLong": "Skin diseases",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from skin diseases.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define skin diseases are L00-L98."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086902,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_skin_diseases__icd10_codes_l00_l98",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Skin diseases” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086902.metadata.json"
+    },
+    "Share of total deaths in both sexes in those aged all ages that are from unintentional injuries": {
+      "titleShort": "Unintentional injuries",
+      "titleLong": "Unintentional injuries",
+      "descriptionShort": "Share of total reported deaths in both sexes in those aged all ages that are from unintentional injuries.",
+      "descriptionKey": [
+        "The International Classification of Diseases (Version 10) codes that define unintentional injuries are V01-X59, Y40-Y86, Y88, Y89 (minus X41-X42, X44-X45), U12.9."
+      ],
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "1950-2023",
+      "type": "Numeric",
+      "owidVariableId": 1086903,
+      "shortName": "percentage_of_cause_specific_deaths_out_of_total_deaths__sex_both_sexes__age_group_all_ages__cause_unintentional_injuries__icd10_codes_v01_x59__y40_y86__y88__y89__minus_x41_x42__x44_x45__u12_9",
+      "lastUpdated": "2025-04-17",
+      "nextUpdate": "2026-04-17",
+      "citationShort": "WHO Mortality Database (2025) – with minor processing by Our World in Data",
+      "citationLong": "WHO Mortality Database (2025) – with minor processing by Our World in Data. “Unintentional injuries” [dataset]. WHO Mortality Database, “WHO Mortality Database” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1086903.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-08-21",
+  "activeFilters": {
+    "focus": "Cardiovascular disease~Cancers~Dementias and neuropsychiatric disorders~Respiratory infections~Respiratory diseases~Diabetes, blood and endocrine disorders",
+    "tab": "line",
+    "time": "earliest..2021"
+  }
+}
