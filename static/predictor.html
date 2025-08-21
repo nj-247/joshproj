@@ -7,166 +7,205 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <style>
-    body {
-      display: block;
-      justify-content: center;
-      padding: 40px;
-    }
-  </style>
+  
 </head>
 <body>
-
   <header>
     <div class="content">
-      <h1>CHD Risk Prediction Tool</h1>
-      <p>Enter your health and lifestyle data below to get a personalized risk assessment for coronary heart disease.</p>
+      <h1>CHD Prediction Tool</h1>
+      <p>Enter your medical and lifestyle information to assess your risk for coronary heart disease.</p>
       <a href="/" class="btn-primary" style="margin-top:20px;">&#8592; Back to Home</a>
     </div>
   </header>
 
-  <div class="container">
-    <h2>CHD Diagnostic Tool</h2>
+  <div class="main-card">
+    <div class="form-container">
+      <h2>CHD Diagnostic Tool</h2>
+      <form id="diagnostic-form" autocomplete="off">
+        <div class="form-group">
+          <label class="tooltip">
+            Age:
+            <input type="number" id="age" name="age" min="29" max="77" required />
+            <span class="tooltiptext">Risk increases with age.</span>
+          </label>
+          <br />
 
-    <div class="form-group">
-<label>
-  Age:
-  <input type="number" id="age" name="age" min="0" max="120" required />
-</label>
-<br />
+          <label class="tooltip">
+            Sex:
+            <select id="sex" name="sex" required>
+              <option value="0">Male</option>
+              <option value="1">Female</option>
+            </select>
+            <span class="tooltiptext">>Men have higher risk at earlier ages.</span>
+          </label>
+          <br />
 
-<label>
-  Sex:
-  <select id="sex" name="sex" required>
-    <option value="0">Male</option>
-    <option value="1">Female</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Chest Pain Type:
+            <select id="chest_pain_type" name="chest_pain_type" required>
+              <option value="0">Typical angina</option>
+              <option value="1">Atypical angina</option>
+              <option value="2">Non-anginal pain</option>
+              <option value="3">Asymptomatic</option>
+            </select>
+            <span class="tooltiptext">
+              Typical angina (classic chest pain)<br>
+              Atypical angina (unusual pain)<br>
+              Non-anginal pain (not heart-related)<br>
+              Asymptomatic (no pain, but evidence of disease)
+            </span>
+          </label>
+          <br />
 
-<label>
-  Chest Pain Type:
-  <select id="chest_pain_type" name="chest_pain_type" required>
-    <option value="0">Typical angina</option>
-    <option value="1">Atypical angina</option>
-    <option value="2">Non-anginal pain</option>
-    <option value="3">Asymptomatic</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Resting Blood Pressure (mm Hg):
+            <input type="number" id="resting_blood_pressure" name="resting_blood_pressure" min="94" max="200" required />
+            <span class="tooltiptext">Typical range: 94–200 mm Hg<br>Higher values increase risk.</span>
+          </label>
+          <br />
 
-<label>
-  Resting Blood Pressure (mm Hg):
-  <input type="number" id="resting_blood_pressure" name="resting_blood_pressure" min="0" max="300" required />
-</label>
-<br />
+          <label class="tooltip">
+            Serum Cholesterol (mg/dl):
+            <input type="number" id="cholestoral" name="cholestoral" min="126" max="417" required />
+            <span class="tooltiptext">Typical range: 126–417 mg/dl<br>High cholesterol increases risk.</span>
+          </label>
+          <br />
 
-<label>
-  Serum Cholesterol (mg/dl):
-  <input type="number" id="cholestoral" name="cholestoral" min="0" max="600" required />
-</label>
-<br />
+          <label class="tooltip">
+            Fasting Blood Sugar:
+            <select id="fasting_blood_sugar" name="fasting_blood_sugar" required>
+              <option value="0">Lower than 120 mg/ml</option>
+              <option value="1">Greater than 120 mg/ml</option>
+            </select>
+            <span class="tooltiptext">0: &lt;120 mg/dl (normal)<br>1: &gt;120 mg/dl (diabetes risk)</span>
+          </label>
+          <br />
 
-<label>
-  Fasting Blood Sugar:
-  <select id="fasting_blood_sugar" name="fasting_blood_sugar" required>
-    <option value="0">Lower than 120 mg/ml</option>
-    <option value="1">Greater than 120 mg/ml</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Resting ECG Results:
+            <select id="rest_ecg" name="rest_ecg" required>
+              <option value="0">ST-T wave abnormality</option>
+              <option value="1">Normal</option>
+              <option value="2">Left ventricular hypertrophy</option>
+            </select>
+            <span class="tooltiptext">
+              ST-T abnormality (ischemia)<br>
+              Normal<br>
+              LV hypertrophy (enlarged heart muscle)
+            </span>
+          </label>
+          <br />
 
-<label>
-  Resting ECG Results:
-  <select id="rest_ecg" name="rest_ecg" required>
-    <option value="0">ST-T wave abnormality</option>
-    <option value="1">Normal</option>
-    <option value="2">Left ventricular hypertrophy</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Maximum Heart Rate Achieved:
+            <input type="number" id="Max_heart_rate" name="Max_heart_rate" min="71" max="202" required />
+            <span class="tooltiptext">Typical range for Adults: 71–202 bpm<br>Lower max HR indicates higher risk.</span>
+          </label>
+          <br />
 
-<label>
-  Maximum Heart Rate Achieved:
-  <input type="number" id="Max_heart_rate" name="Max_heart_rate" min="0" max="250" required />
-</label>
-<br />
+          <label class="tooltip">
+            Exercise Induced Angina:
+            <select id="exercise_induced_angina" name="exercise_induced_angina" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <span class="tooltiptext">Yes: Chest pain during exercise indicates higher risk.</span>
+          </label>
+          <br />
 
-<label>
-  Exercise Induced Angina:
-  <select id="exercise_induced_angina" name="exercise_induced_angina" required>
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Oldpeak (ST Depression):
+            <input type="number" id="oldpeak" name="oldpeak" step="0.1" min="0.0" max="6.2" required />
+            <span class="tooltiptext">Typical range: 0.0–6.2<br>Higher values indicate more severe blockage.</span>
+          </label>
+          <br />
 
-<label>
-  Oldpeak (ST Depression):
-  <input type="number" id="oldpeak" name="oldpeak" step="0.1" required />
-</label>
-<br />
+          <label class="tooltip">
+            Slope of Peak Exercise ST Segment:
+            <select id="slope" name="slope" required>
+              <option value="0">Downsloping</option>
+              <option value="1">Upsloping</option>
+              <option value="2">Flat</option>
+            </select>
+            <span class="tooltiptext">
+              Downsloping (highest risk)<br>
+              Upsloping (normal response)<br>
+              Flat (moderate risk)
+            </span>
+          </label>
+          <br />
 
-<label>
-  Slope of Peak Exercise ST Segment:
-  <select id="slope" name="slope" required>
-    <option value="0">Downsloping</option>
-    <option value="1">Upsloping</option>
-    <option value="2">Flat</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Vessels Colored by Fluoroscopy:
+            <select id="vessels_colored_by_flourosopy" name="vessels_colored_by_flourosopy" required>
+              <option value="0">Zero</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+              <option value="4">Four</option>
+            </select>
+            <span class="tooltiptext">Higher value = more blocked vessels = higher risk.</span>
+          </label>
+          <br />
 
-<label>
-  Vessels Colored by Fluoroscopy:
-  <select id="vessels_colored_by_flourosopy" name="vessels_colored_by_flourosopy" required>
-    <option value="1">Zero</option>
-    <option value="2">One</option>
-    <option value="0">Two</option>
-    <option value="3">Three</option>
-    <option value="4">Four</option>
-  </select>
-</label>
-<br />
+          <label class="tooltip">
+            Thalassemia:
+            <select id="thalassemia" name="thalassemia" required>
+              <option value="0">Reversable Defect</option>
+              <option value="1">Fixed Defect</option>
+              <option value="2">Normal</option>
+              <option value="3">No</option>
+            </select>
+            <span class="tooltiptext">
+              Reversible defect (ischemia)<br>
+              Fixed defect (scar tissue)<br>
+              Normal<br>
+              No defect
+            </span>
+          </label>
+          <br />
+        </div>
 
-<label>
-  Thalassemia:
-  <select id="thalassemia" name="thalassemia" required>
-    <option value="0">Reversable Defect</option>
-    <option value="1">Fixed Defect</option>
-    <option value="2">Normal</option>
-    <option value="3">No</option>
-  </select>
-</label>
-<br />
+        <button class="btn-secondary" type="button" onclick="mapFeatures()">Predict</button>
+      </form>
     </div>
+    <div class="right-panel">
+      <div class="vis-container">
+        <h3>Risk Level</h3>
+        <div id="vis"></div>
+      </div>
 
-    <button class="btn-secondary" onclick="mapFeatures()" >Predict</button>
-    <div id="vis"></div>
+      <div class="vis-container report" id="report" style="display: none;">
+        <h3>Diagnostic Report</h3>
+        <p><strong>CHD Risk Score:</strong> <span id="riskScore"></span></p>
+        <p><strong>Risk Category:</strong> <span id="riskCategory"></span></p>
+        <h4>Input Feature Breakdown</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody id="featureTable"></tbody>
+        </table>
+      </div>
 
-    <div class="report" id="report" style="display: none;">
-      <h3>Diagnosis Report</h3>
-      <p><strong>CHD Risk Score:</strong> <span id="riskScore"></span></p>
-      <p><strong>Risk Category:</strong> <span id="riskCategory"></span></p>
-
-      <h4>Input Feature Breakdown</h4>
-      <table>
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody id="featureTable"></tbody>
-      </table>
+      <div class="vis-container actions" id="actions" style="display: none;">
+        <h3>Recommended Actions</h3>
+        <ul id="actionList">
+          <!-- Actions will be populated by JS based on risk. Using showActions -->
+        </ul>
+      </div>
     </div>
   </div>
 
-  <script>
-    console.log("Page loaded");
 
 
-    async function mapFeatures() {
+<script>
+  console.log("Page loaded");
+
+  async function mapFeatures() {
   // Get numeric values directly from form
 const age = Number(document.getElementById("age").value);
 const rbp = Number(document.getElementById("resting_blood_pressure").value);
@@ -199,10 +238,6 @@ const features = [
   vessels,
   thal
 ];
-
-
-
-
 
   try {
     // Send numeric features to backend for prediction
@@ -280,17 +315,67 @@ const features = [
     });
 
     document.getElementById("report").style.display = "block";
+
+    // Show recommended actions based on risk level
+    showActions(riskLevel);
   } catch (error) {
       console.error("Error during prediction:", error);
       alert("Failed to get prediction. Please try again.");
       console.log("Model input array:", features);
-  }
-
-
-  
+  }  
 }
 
+  function showActions(riskLevel) {
+  const actionList = document.getElementById("actionList");
+  actionList.innerHTML = "";
+  let actions = [];
+  // Normalize riskLevel to lowercase and trim spaces
+  const normalized = riskLevel.toLowerCase().trim();
+  if (normalized.startsWith("high")) {
+    actions = [
+      "Consult a cardiologist soon.",
+      "Consider lifestyle changes: diet, exercise, quit smoking.",
+      "Monitor blood pressure and cholesterol regularly.",
+      "Follow prescribed medications."
+    ];
+  } else if (normalized.startsWith("moderate")) {
+    actions = [
+      "Discuss risk factors with your doctor.",
+      "Adopt heart-healthy habits.",
+      "Schedule regular checkups."
+    ];
+  } else {
+    actions = [
+      "Maintain healthy lifestyle.",
+      "Continue regular checkups."
+    ];
+  }
+  actions.forEach(a => {
+    const li = document.createElement("li");
+    li.textContent = a;
+    actionList.appendChild(li);
+  });
+  document.getElementById("actions").style.display = "block";
+}
 
-  </script>
+</script>
+
+  <section>
+    <h2>The Making of this Project</h2>
+     <p>
+      Initially, I wanted to build a simple web app to predict coronary heart disease risk using machine learning. 
+      I started by researching medical datasets and chose the Cleveland Heart Disease dataset for its comprehensive features. 
+      After preprocessing the data and training a model, I created this interactive frontend so users can input their health information 
+      and instantly see their risk score, visualized with a chart and accompanied by actionable recommendations. 
+      The project combines Python (for the backend model) and JavaScript (for the frontend visualization), 
+      aiming to make risk assessment accessible and easy to understand.
+    </p>
+    <p> 
+      The creation of this project involved three main phases:
+      
+    </p>
+  </section>
+
+
 </body>
 </html>
