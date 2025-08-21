@@ -12,11 +12,13 @@
 
   <!-- D3.js for data visualization -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
-
 </head>
 
-<body>
 
+
+
+
+<body>
   <header>
     <div class="content">
       <h1>Predicting Cardiovascular Disease</h1>
@@ -54,76 +56,226 @@
   <section>
     <h2>2. Problem Statement</h2>
     <p>
-      In 2021, CHD accounted for 26.9% of deaths from major causes in the U.S. Early detection of key risk factors—like high blood pressure, cholesterol, and BMI—can significantly reduce preventable complications.
+      In 2021, CHD accounted for 26.9% of deaths from major causes in the U.S. Early detection of key risk factors—like high blood pressure, cholesterol, and BMI—can significantly reduce preventable complications. 
+    </p>
+      
+    <div id="line-chart" style="width: 100%; max-width: 800px; height: 480px; margin: 2rem auto;"></div>
+
+    <p style="text-align: right;"> Source: <a id = "source-line-chart" href="https://ourworldindata.org/grapher/share-of-deaths-from-major-causes?tab=line&time=earliest..2022" target="_blank">Our World in Data</a></p>
+
     </p>
   </section>
 
+<!-- Line Graph -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const chartData = [
-    { factor: 'Age', weight: 0.3 },
-    { factor: 'BMI', weight: 0.2 },
-    { factor: 'Blood Pressure', weight: 0.2 },
-    { factor: 'Cholesterol', weight: 0.2 },
-    { factor: 'Smoking', weight: 0.1 },
-    { factor: 'Diabetes', weight: 0.1 },
-    { factor: 'Fasting Blood Sugar', weight: 0.1 }
+d3.csv("/static/share-of-deaths-from-major-causes.csv").then(function(raw) {
+  const data = raw.filter(d => d.Entity === "United States");
+
+  const causes = [
+    {key: "Share of total deaths in both sexes in those aged all ages that are from cardiovascular diseases", label: "Cardiovascular disease", color: "#0099b8", tooltip: "Heart and blood vessel diseases."},
+    {key: "Share of total deaths in both sexes in those aged all ages that are from malignant neoplasms", label: "Cancers", color: "#b85c00", tooltip: "Malignant tumors and cancers."},
+    {key: "Share of total deaths in both sexes in those aged all ages that are from neuropsychiatric conditions", label: "Dementias & Neuropsychiatric", color: "#a23ebc", tooltip: "Alzheimer's, dementias, and mental disorders."},
+    {key: "Share of total deaths in both sexes in those aged all ages that are from respiratory infections", label: "Respiratory infections", color: "#e3b800", tooltip: "Pneumonia, influenza, and other infections."},
+    {key: "Share of total deaths in both sexes in those aged all ages that are from respiratory diseases", label: "Respiratory diseases", color: "#0071e3", tooltip: "Chronic lung diseases like COPD and asthma."}
   ];
 
-  // BAR CHART
-  const svg = d3.select("#bar-chart")
-                .append("svg")
-                .attr("width", 600)
-                .attr("height", 400);
+  const years = data.map(d => +d.Year);
 
-  const margin = { top: 20, right: 30, bottom: 40, left: 100 },
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom;
+  const series = causes.map(cause => ({
+    name: cause.label,
+    color: cause.color,
+    tooltip: cause.tooltip,
+    key: cause.key,
+    values: data.map(d => ({
+      year: +d.Year,
+      value: +d[cause.key]
+    }))
+  }));
 
-  const g = svg.append("g")
-               .attr("transform", `translate(${margin.left},${margin.top})`);
+  const width = 800, height = 480, margin = {top: 60, right: 180, bottom: 50, left: 60};
+
+  const svg = d3.select("#line-chart")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
   const x = d3.scaleLinear()
-              .domain([0, d3.max(chartData, d => d.weight)])
-              .range([0, width]);
+    .domain(d3.extent(years))
+    .range([margin.left, width - margin.right]);
 
-  const y = d3.scaleBand()
-              .domain(chartData.map(d => d.factor))
-              .range([0, height])
-              .padding(0.1);
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(series, s => d3.max(s.values, v => v.value)) * 1.1])
+    .nice()
+    .range([height - margin.bottom, margin.top]);
 
-  g.selectAll(".bar")
-    .data(chartData)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("y", d => y(d.factor))
-    .attr("width", d => x(d.weight))
-    .attr("height", y.bandwidth())
-    .attr("fill", "#00bcd4");
+  // Gridlines
+  svg.append("g")
+    .attr("class", "grid")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickSize(-height + margin.top + margin.bottom).tickFormat(""))
+    .selectAll("line")
+    .attr("stroke", "#eee");
 
-  g.append("g")
-    .call(d3.axisLeft(y));
+  svg.append("g")
+    .attr("class", "grid")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).tickSize(-width + margin.left + margin.right).tickFormat(""))
+    .selectAll("line")
+    .attr("stroke", "#eee");
 
-  g.append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(5));
+  // Axes
+  svg.append("g")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
-  // TABLE POPULATION
-  const table = d3.select("#risk-table").select("tbody");
-  table.selectAll("tr")
-    .data(chartData)
-    .enter()
-    .append("tr")
-    .html(d =>
-      `<td style="padding: 0.5rem;">${d.factor}</td>
-       <td style="padding: 0.5rem;">--</td>
-       <td style="padding: 0.5rem;">${(d.weight * 100).toFixed(1)}%</td>`
-    );
+  svg.append("g")
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(6).tickFormat(d => d + "%"));
+
+  // Tooltip div
+  const tooltip = d3.select("body")
+    .append("div")
+    .attr("class", "d3-tooltip")
+    .style("position", "absolute")
+    .style("background", "#fff")
+    .style("border", "1px solid #ccc")
+    .style("padding", "8px 12px")
+    .style("border-radius", "8px")
+    .style("pointer-events", "none")
+    .style("font-size", "1rem")
+    .style("color", "#222")
+    .style("box-shadow", "0 2px 8px rgba(0,0,0,0.08)")
+    .style("opacity", 0);
+
+  // Line generator
+  const line = d3.line()
+    .x(d => x(d.year))
+    .y(d => y(d.value));
+
+  // Draw lines and dots, store references for highlight
+  const linePaths = {};
+  const dotGroups = {};
+
+  series.forEach(s => {
+    // Line
+    linePaths[s.name] = svg.append("path")
+      .datum(s.values)
+      .attr("class", "cause-line")
+      .attr("fill", "none")
+      .attr("stroke", s.color)
+      .attr("stroke-width", 2.5)
+      .attr("d", line);
+
+    // Dots with tooltips
+    dotGroups[s.name] = svg.append("g")
+      .attr("class", "cause-dots")
+      .selectAll("circle")
+      .data(s.values)
+      .enter()
+      .append("circle")
+      .attr("cx", d => x(d.year))
+      .attr("cy", d => y(d.value))
+      .attr("r", 4)
+      .attr("fill", s.color)
+      .on("mouseover", function(event, d) {
+        tooltip.transition().duration(150).style("opacity", 0.75);
+        tooltip.html(
+          `<strong>${s.name}</strong><br>
+           <span style="color:#666;">${s.tooltip}</span><br>
+           <b>Year:</b> ${d.year}<br>
+           <b>Share:</b> ${d.value.toFixed(2)}%`
+        )
+        .style("left", (event.pageX + 16) + "px")
+        .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.transition().duration(200).style("opacity", 0);
+      });
+  });
+
+  // Title and subtitle
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", margin.top - 35)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "1.7rem")
+    .attr("font-weight", "bold")
+    .text("Share of deaths from major causes, United States");
+
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", margin.top - 12)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "1rem")
+    .attr("fill", "#444")
+    .text("Share of reported deaths from major causes, 1950–2021");
+
+  // Legend with highlight and tooltips
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width - margin.right + 20},${margin.top})`);
+
+  series.forEach((s, i) => {
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", i * 28)
+      .attr("width", 18)
+      .attr("height", 18)
+      .attr("fill", s.color)
+      .style("cursor", "pointer")
+      .on("mouseover", function(event) {
+        // Highlight line and dots
+        Object.keys(linePaths).forEach(name => {
+          linePaths[name].attr("stroke-width", name === s.name ? 5 : 2.5)
+                         .attr("opacity", name === s.name ? 1 : 0.2);
+          dotGroups[name].attr("fill", name === s.name ? s.color : "#ccc")
+                         .attr("opacity", name === s.name ? 1 : 0.2);
+        });
+        tooltip.transition().duration(150).style("opacity", 0.95);
+        tooltip.html(`<strong>${s.name}</strong><br><span style="color:#666;">${s.tooltip}</span>`)
+          .style("left", (event.pageX + 16) + "px")
+          .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        // Reset highlight
+        Object.keys(linePaths).forEach(name => {
+          linePaths[name].attr("stroke-width", 2.5).attr("opacity", 1);
+          dotGroups[name].attr("fill", series.find(c => c.name === name).color).attr("opacity", 1);
+        });
+        tooltip.transition().duration(200).style("opacity", 0);
+      });
+
+    legend.append("text")
+      .attr("x", 28)
+      .attr("y", i * 28 + 13)
+      .attr("font-size", "1rem")
+      .attr("fill", "#222")
+      .text(s.name)
+      .style("cursor", "pointer")
+      .on("mouseover", function(event) {
+        Object.keys(linePaths).forEach(name => {
+          linePaths[name].attr("stroke-width", name === s.name ? 5 : 2.5)
+                         .attr("opacity", name === s.name ? 1 : 0.2);
+          dotGroups[name].attr("fill", name === s.name ? s.color : "#ccc")
+                         .attr("opacity", name === s.name ? 1 : 0.2);
+        });
+        tooltip.transition().duration(150).style("opacity", 0.95);
+        tooltip.html(`<strong>${s.name}</strong><br><span style="color:#666;">${s.tooltip}</span>`)
+          .style("left", (event.pageX + 16) + "px")
+          .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        Object.keys(linePaths).forEach(name => {
+          linePaths[name].attr("stroke-width", 2.5).attr("opacity", 1);
+          dotGroups[name].attr("fill", series.find(c => c.name === name).color).attr("opacity", 1);
+        });
+        tooltip.transition().duration(200).style("opacity", 0);
+      });
+  });
 });
-
-
 </script>
+ 
+
 <section class="goal">
   <div>
     <h2>Visual Data Insights</h2>
@@ -133,11 +285,11 @@ document.addEventListener("DOMContentLoaded", function() {
     <div id="bar-chart" style="width: 100%; max-width: 600px; height: 400px; margin: 2rem auto;"></div>
 
     <!-- Table Placeholder -->
-    <table id="risk-table" style="width: 100%; max-width: 700px; margin: 2rem auto; border-collapse: collapse; color: white;">
+    <table id="risk-table" style="width: 100%; max-width: 700px; margin: 2rem auto; border-collapse: collapse; color: black;">
       <thead>
         <tr>
           <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Factor</th>
-          <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Value</th>
+          <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Significance</th>
           <th style="border-bottom: 1px solid #ccc; padding: 0.5rem;">Risk Weight</th>
         </tr>
       </thead>
@@ -148,7 +300,89 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 </section>
 
+<script>
+  // Only declare data, explanations, width, height, margin once
+  const data = [
+    {"feature":"thalassemia","importance":0.2047834545},
+    {"feature":"chest_pain_type","importance":0.2031769454},
+    {"feature":"vessels_colored_by_flourosopy","importance":0.089784421},
+    {"feature":"oldpeak","importance":0.0769180581},
+    {"feature":"exercise_induced_angina","importance":0.0675847307},
+    {"feature":"slope","importance":0.0669932961},
+    {"feature":"sex","importance":0.0657947809},
+    {"feature":"Max_heart_rate","importance":0.0524145775},
+    {"feature":"cholestoral","importance":0.0405757613},
+    {"feature":"age","importance":0.0401431881},
+    {"feature":"resting_blood_pressure","importance":0.0365722291},
+    {"feature":"fasting_blood_sugar","importance":0.0276762154},
+    {"feature":"rest_ecg","importance":0.0275824144}
+  ];
 
+  const explanations = {
+    "age": "Risk increases with age due to plaque buildup and vessel changes.",
+    "sex": "Men have higher risk at earlier ages; women’s risk rises after menopause.",
+    "chest_pain_type": "Typical angina and asymptomatic cases are strong predictors of disease.",
+    "resting_blood_pressure": "High blood pressure damages arteries and increases heart workload.",
+    "cholestoral": "High cholesterol leads to plaque buildup; risk increases but not always linearly.",
+    "fasting_blood_sugar": "High fasting glucose signals diabetes risk, which accelerates heart disease.",
+    "rest_ecg": "Abnormal ECG (ST-T or LVH) indicates higher risk.",
+    "Max_heart_rate": "Lower max heart rate during stress indicates higher risk.",
+    "exercise_induced_angina": "Chest pain during exercise is a strong indicator of heart disease.",
+    "oldpeak": "Greater ST depression during exercise means more severe blockage.",
+    "slope": "Downsloping ST segment is a strong indicator of ischemia.",
+    "vessels_colored_by_flourosopy": "More blocked vessels seen in fluoroscopy means higher risk.",
+    "thalassemia": "Fixed/reversible defects indicate past damage or ischemia; higher risk."
+  };
+
+  const barWidth = 600;
+  const barHeight = 400;
+  const barMargin = {top: 20, right: 20, bottom: 40, left: 150};
+
+  // --- Populate Table ---
+  const tbody = d3.select("#risk-table tbody");
+  data.forEach(d => {
+    tbody.append("tr")
+      .html(`
+        <td style="padding:0.5rem;border-bottom:1px solid #444;">${d.feature}</td>
+        <td style="padding:0.5rem;border-bottom:1px solid #444;">${explanations[d.feature] || "-"}</td>
+        <td style="padding:0.5rem;border-bottom:1px solid #444;">${d.importance.toFixed(3)}</td>
+      `);
+  });
+
+  // --- Bar Chart ---
+  const svgBar = d3.select("#bar-chart")
+    .append("svg")
+    .attr("width", barWidth)
+    .attr("height", barHeight);
+
+  const xBar = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.importance)])
+    .range([barMargin.left, barWidth - barMargin.right]);
+
+  const yBar = d3.scaleBand()
+    .domain(data.map(d => d.feature))
+    .range([barMargin.top, barHeight - barMargin.bottom])
+    .padding(0.1);
+
+  svgBar.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", barMargin.left)
+    .attr("y", d => yBar(d.feature))
+    .attr("width", d => xBar(d.importance) - barMargin.left)
+    .attr("height", yBar.bandwidth())
+    .attr("fill", "steelblue");
+
+  // Axes
+  svgBar.append("g")
+    .attr("transform", `translate(0,${barHeight - barMargin.bottom})`)
+    .call(d3.axisBottom(xBar).ticks(5));
+
+  svgBar.append("g")
+    .attr("transform", `translate(${barMargin.left},0)`)
+    .call(d3.axisLeft(yBar));
+</script>
 
   <section>
     <h2>3. Goals & Tools</h2>
@@ -162,10 +396,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80');"></div>
 
+  <section>
+    <h2>4. How It Works</h2>
+    <p>
+      The model analyzes key health indicators to estimate the likelihood of coronary heart disease. Users enter their data, and the model provides a risk score along with personalized recommendations. The risk score is calculated based on how closely the user's profile matches confirmed cases of coronary heart disease in the dataset.
+    </p>
+  </section>
+
   <section id="run-model">
     <h2>Run the CHD Risk Predictor</h2>
     <p>Click below to input your health data and get a personalized heart disease risk report.</p>
-    <a href="/predictor" class="btn-primary">Go to Prediction Tool</a>
+    <a href="/predictor" class="btn-primary" style="margin-bottom:30px;">Go to Prediction Tool</a>
   </section>
 
   <a href="/" class="btn-primary" style="margin-top:20px;">&#8592; Back to Home</a>
@@ -175,8 +416,43 @@ document.addEventListener("DOMContentLoaded", function() {
   </footer>
 
 
+<!-- Smooth Scrolling Script -->
+<script>
+function slowScrollTo(target, duration = 1200) {
+  const start = window.pageYOffset;
+  const end = target.getBoundingClientRect().top + start;
+  const change = end - start;
+  const startTime = performance.now();
+
+  function animateScroll(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, start + change * progress);
+    if (progress < 1) {
+      requestAnimationFrame(animateScroll);
+    }
+  }
+  requestAnimationFrame(animateScroll);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      slowScrollTo(target, 800); // 1800ms for slower scroll
+    }
+  });
+});
+</script>
+
+
+
 </body>
 </html>
+
+
 
 
 
