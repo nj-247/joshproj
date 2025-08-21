@@ -1,5 +1,9 @@
 /* style.css */
-    html, body {
+html {
+  scroll-behavior: smooth;
+}  
+
+html, body {
       margin: 0;
       padding: 0;
       font-family: 'San Francisco', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -43,6 +47,13 @@
       color: #444;
     }
 
+    #source-line-chart {
+      text-align: right;
+      color:#0071e3; 
+      text-decoration:underline;
+    }
+
+
     .btn-primary {
       background: linear-gradient(90deg, #0071e3 0%, #2997ff 100%);
       border: none;
@@ -64,7 +75,7 @@
     }
 
     section {
-      padding: 80px 24px;
+      padding: 10px 50px 20px;
       max-width: 1000px;
       margin: 0 auto;
       background: #fff;
@@ -232,28 +243,130 @@ input:focus, select:focus {
 /* Tooltip Styling */
 .tooltip {
   position: relative;
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1d1d1f; /* Apple dark gray */
+  cursor: help;
 }
 
-.tooltip-text {
-  visibility: visible;
-  opacity: 1;
-  width: 220px;
-  background-color: #1d1d1f;
+.tooltiptext {
+  visibility: hidden;
+  width: 260px;
+  background-color: rgba(50, 50, 50, 0.9);
   color: #fff;
   text-align: left;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 10px 14px;
   position: absolute;
-  left: 105%;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: opacity 0.3s;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -130px;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
   font-size: 13px;
   line-height: 1.4;
-  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.tooltip:hover .tooltip-text {
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(50, 50, 50, 0.9) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip:focus-within .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
+ .main-card {
+      display: flex;
+      gap: 48px; /* More space between left and right panels */
+      align-items: flex-start;
+      justify-content: left;
+      margin: 30px auto;
+      max-width: 1200px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+      padding: 30px 0px 30px 0px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Vertical divider between form and right panel */
+    .main-card::before {
+      content: "";
+      position: flex;
+      top: 48px;
+      bottom: 48px;
+      left: 50%;
+      width: 2px;
+      background: #e5e8ef;
+      border-radius: 2px;
+      transform: translateX(-1px);
+      z-index: 1;
+    }
+
+    /* Ensure left and right panels have space from divider */
+    .form-container, .right-panel {
+      flex: 1;
+      min-width: 320px;
+      max-width: 500px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Stack cards in right panel with even spacing */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 32px; /* Even vertical spacing between cards */
+      max-width: 400px;
+      width: 100%;
+    }
+
+    /* Individual card styling for vis/report/actions */
+    .vis-container {
+      background: #f9f9fa;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      margin: 0; /* Remove extra margin */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .main-card {
+        flex-direction: column;
+        padding: 20px 8px;
+      }
+      .main-card::before {
+        display: none;
+      }
+      .form-container, .right-panel {
+        max-width: 100%;
+        min-width: 0;
+      }
+      .right-panel {
+        gap: 24px;
+      }
+      .vis-container {
+        padding: 18px;
+        border-radius: 10px;
+      }
+    }
