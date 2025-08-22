@@ -362,19 +362,85 @@ const features = [
 
   <section>
     <h2>The Making of this Project</h2>
-     <p>
-      Initially, I wanted to build a simple web app to predict coronary heart disease risk using machine learning. 
-      I started by researching medical datasets and chose the Cleveland Heart Disease dataset for its comprehensive features. 
-      After preprocessing the data and training a model, I created this interactive frontend so users can input their health information 
-      and instantly see their risk score, visualized with a chart and accompanied by actionable recommendations. 
-      The project combines Python (for the backend model) and JavaScript (for the frontend visualization), 
-      aiming to make risk assessment accessible and easy to understand.
+     <p style="text-indent: 40px">
+      Initially, I set out to build a simple web app to predict coronary heart disease risk using machine learning. 
+      However, the project evolved into a full-stack application where users can input health information 
+      and instantly receive a risk score, visualized interactively and paired with personalized recommendations. 
+      I learned how to integrate machine learning models with web technologies, as well as incvorporating data visualization 
+      libraries like Vega-Lite and D3.js to make the web app more engaging and informative.
+      The project also taught me the importance of user experience design, as I focused on creating an intuitive interface 
+      that guides users through the diagnostic process.
+      The final product is a comprehensive tool that not only predicts risk but also educates users about their health, 
+      making it a valuable resource for anyone concerned about coronary heart disease.
     </p>
     <p> 
-      The creation of this project involved three main phases:
-      
+      The project unfolded in five key phases:
+      <ol>
+        <li>Data Collection: Sourced the Cleveland Heart Disease dataset.</li>
+        <li>Model Training: Preprocessed data and trained a machine learning model.</li>
+        <li>Frontend Development: Built an interactive web interface using HTML, CSS, and JavaScript.</li>
+        <li>Visualization: Integrated Vega-Lite for dynamic risk visualization.</li>
+        <li>Testing & Deployment: Validated the app's functionality and deployed it for public access.</li>
+      </ol>
+
     </p>
-  </section>
+  <div style="display:flex; justify-content:center;">
+    <div class="carousel">
+      <div class="slides">
+        <img src="/static/photos/Screenshot%202025-08-20%20193705.png" alt="Screenshot 1">
+        <img src="/static/photos/Screenshot%202025-08-21%20213113.png" alt="Screenshot 2">
+        <img src="/static/photos/Screenshot%202025-08-21%20213239.png" alt="Screenshot 3">
+        <img src="/static/photos/Screenshot%202025-08-21%20213415.png" alt="Screenshot 4">
+        <img src="/static/photos/Screenshot%202025-08-21%20213513.png" alt="Screenshot 5">
+        <img src="/static/photos/Screenshot%202025-08-21%20213526.png" alt="Screenshot 6">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <div class="dots"></div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
+    const dotsContainer = document.querySelector('.dots');
+    let index = 0;
+
+    // Create dots
+    images.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => showSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(${-index * 600}px)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      index = (index > 0) ? index - 1 : images.length - 1;
+      showSlide(index);
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+      index = (index < images.length - 1) ? index + 1 : 0;
+      showSlide(index);
+    });
+
+    // Show first slide on load
+    showSlide(index);
+  </script>
+
+
+
+</section>
+
 
 
 </body>
